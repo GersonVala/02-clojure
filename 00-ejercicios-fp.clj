@@ -119,9 +119,41 @@
 
 ; 3) Dada una secuencia con dos subsecuencias, definir funciones para determinar:
 ;   a) La unión de ambas subsecuencias.
+
+(require '[clojure.set :as set])
+(defn unionV2 [collA collB]
+  (set/union (set collA) (set collB)))
 ;   b) La intersección de ambas subsecuencias.
+
+
+ ;v1 Los sets en clj actuan como funciones. Filter trae todos los elementos verdaderos. 
+;Set al encontrar un valor, devuevle ese valor lo que es tomado como verdadero
+
+(defn interseccionV1 [coll1 coll2]
+  (filter (set coll1) coll2))
+
+
+ ;v2 Require es como el import de java: trae las librerias de clojure. :as es para poner alias asi sabe que cuando se llame a set/ es para llamar a funciones. 
+;set/intersection es como usar el . en java para llamar a la funcion. Esta trabaja solo con sets por eso se deben convertir 
+;con (dir clojure.set) podemos ver todas las funciones que trae
+
+(require '[clojure.set :as set])
+(defn interseccionV2 [A B]
+  (set/intersection (set A) (set B)))
+
+
 ;   c) La diferencia de ambas subsecuencias.
-;   d) La diferencia simétrica de ambas subsecuencias.
+
+(require '[clojure.set :as set])
+(defn diferenciaV1 [a b]
+  (set/difference (set a) (set b)))
+
+;   d) La diferencia simétrica de ambas subsecuencias. (solo a y solo b sin elemetos de a y b)
+
+(require '[clojure.set :as set])
+(defn diferenciaSimetricaV1 [a b]
+  (set/union (set/difference (set a) (set b)) (set/difference (set b) (set a))))
+
 
 ; 4) Definir una función que aplicada sobre un número natural n; obtenga como
 ; resultado el máximo valor resultante de aplicar cierta función B (predefinida)
