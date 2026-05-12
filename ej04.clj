@@ -29,22 +29,30 @@
 ;; 4. ALFA primeros 7: No empujamos nada, ya está al final.
 (defn alpha [color]
   (bit-and color 255))
-;Espera un hexa
-(defn colorRGB[color]
-
-(let [rojo (red color)
-      verde (green color)
-      azul (blue color)
-      alph (alpha color)]
-  
-  {:rojo  rojo
-   :verde verde
-   :azul  azul
-   :alpha alph} 
-)
-)
 
 
- (colorRGB 0xFFFFFFFF)
-  
- 
+(defn validar-hexa [valor]
+  (and (number? valor)
+       (>= valor 0)
+       (<= valor 0xFFFFFFFF)))
+
+
+
+;Espera un hexa 0x....
+(defn colorRGB [color]
+  (if (validar-hexa color)
+    (let [rojo (red color)
+          verde (green color)
+          azul (blue color)
+          alph (alpha color)]
+
+      (array-map :rojo  rojo
+                 :verde verde
+                 :azul  azul
+                 :alpha alph))
+    "Se esperaba valor Hexadecimal de la forma 0xRRGGVVAA"))
+
+
+
+
+(colorRGB 0xA12Affff)
