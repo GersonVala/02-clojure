@@ -7,9 +7,7 @@
   (Integer/parseInt  (apply str (reverse (str num)))))
 
 (defn capicua? [num]
-  (= num (numInvertido num)))
 
-
-(capicua? 1311131)
-
-
+  (if (pos? num)
+    (= num (numInvertido num))
+    "Se esperaba un numero postivo"))(capicua? 123321)
