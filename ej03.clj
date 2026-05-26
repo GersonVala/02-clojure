@@ -1,14 +1,30 @@
 ; Definir la función sig-mul-10 que reciba un número entero y devuelva el primer
 ; múltiplo de 10 que lo supere
 
+(defn sig-mul-10-perez [a]
+  (int (* 
+            10 
+            (Math/floor 
+                (+ (/ a 10.0) 1)
+            )
+        )
+  )
+)
 
-; funcion sigmult10 (numero)
-;(siguiente multiplo de 10)
-; mod devuelve el resto . Ejemplo mod 13 10 = 3
-; restamos 10 - el resultado de mod (3) nos da la distancia que nos falta para el siguiente modulo.
-; = 7 nos falta para llegar a 20, entonces sumamos el numero
-(defn sig-mul-10 [a]
+(defn sig-mul-10-copes [n]
+    (let [q (quot n 10)
+          r (rem n 10)]
+    (* 10 (inc 
+            (if (and (neg? n) (not (zero? r))) ; ¿negativo no múltiplo de 10?
+                (dec q) 
+                 q
+            )
+        )
+    )
+    )
+)
 
-  (+ a (- 10 (mod a 10))))
-
-(sig-mul-10 13)
+; Buscar la definición de 'mod' (no está en el apunte oficial)
+(defn sig-mul-10-baluja [a]
+    (+ a (- 10 (mod a 10)))
+)
